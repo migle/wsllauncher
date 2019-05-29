@@ -63,7 +63,10 @@ int wmain(int argc, wchar_t* argv[])
 		break;
 	case config:
 		std::wcout << "Configuring " << Name << "..." << std::flush;
-		r = wsl.ConfigureDistribution(Name, UidSdkDeveloper, WslFlags);
+		if (argi < argc)
+			r = wsl.ConfigureDistribution(Name, std::stoul(argv[argi]), WslFlags);
+		else
+			r = wsl.ConfigureDistribution(Name, UidSdkDeveloper, WslFlags);
 		std::wcout << " done." << std::endl;
 		break;
 	case launch:
